@@ -10,6 +10,13 @@ cmake_policy(SET CMP0043 NEW)
 
 SET( CMAKE_DISABLE_SOURCE_CHANGES ON )
 SET( CMAKE_DISABLE_IN_SOURCE_BUILD ON )
+SET( Qt5OpenGL_DIR /opt/Qt5.6.1/5.6/gcc_64/lib/cmake/Qt5OpenGL )
+SET( Qt5Core_DIR /opt/Qt5.6.1/5.6/gcc_64/lib/cmake/Qt5Core )
+SET( Qt5Gui_DIR /opt/Qt5.6.1/5.6/gcc_64/lib/cmake/Qt5Gui )
+SET( Qt5Network_DIR /opt/Qt5.6.1/5.6/gcc_64/lib/cmake/Qt5Network )
+SET( Qt5Widgets_DIR /opt/Qt5.6.1/5.6/gcc_64/lib/cmake/Qt5Widgets )
+SET( Qt5Xml_DIR /opt/Qt5.6.1/5.6/gcc_64/lib/cmake/Qt5Xml )
+SET( Qt5_DIR /opt/Qt5.6.1/5.6/gcc_64/lib/cmake/Qt5 )
 
 PROJECT( braingl )
 SET( BinName "${PROJECT_NAME}" )
@@ -73,7 +80,7 @@ INCLUDE( ${VTK_USE_FILE} )
 # ---------------------------------------------------------------------------------------------------------------------------------------------------
 # Setup QT5
 # ---------------------------------------------------------------------------------------------------------------------------------------------------
-FIND_PACKAGE( Qt5 REQUIRED COMPONENTS Core Gui Widgets OpenGL Xml WebKit )
+FIND_PACKAGE( Qt5 REQUIRED COMPONENTS Core Gui Widgets OpenGL Xml )
 
 # Resources
 SET(QtIcon_RCCS resources.qrc)
@@ -153,9 +160,9 @@ IF( NOT  APPLE )
 
     ReadProjectRevisionStatus()
 
-    QT5_USE_MODULES( ${BinName} Widgets OpenGL Network Xml WebKit WebKitWidgets )
+    QT5_USE_MODULES( ${BinName} Widgets OpenGL Network Xml  )
 
-    TARGET_LINK_LIBRARIES( ${BinName} ${VTK_LIBRARIES} z  )
+    TARGET_LINK_LIBRARIES( ${BinName} ${Qt5Gui_OPENGL_LIBRARIES} ${VTK_LIBRARIES} z  )
 ENDIF()
 
 
@@ -177,7 +184,7 @@ IF( APPLE )
     SET( MACOSX_BUNDLE_GUI_IDENTIFIER "de.braingl" )
     SET( MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}" )
     
-    QT5_USE_MODULES( ${BinName} Widgets OpenGL Network Xml WebKit WebKitWidgets )
+    QT5_USE_MODULES( ${BinName} Widgets OpenGL Network Xml )
     TARGET_LINK_LIBRARIES( ${BinName} ${OPENGL_LIBRARY} ${VTK_LIBRARIES} "-framework Foundation" "-framework Cocoa" z)
 
     # create self-contained application bundle with embedded Frameworks and dylibs
