@@ -59,7 +59,7 @@
 #include "../io/statereader.h"
 
 #include <QAction>
-#include <QWebView>
+//#include <QWebView>
 #include <QGLFormat>
 #include <QKeySequence>
 
@@ -113,7 +113,7 @@ MainWindow::MainWindow( bool debug, bool resetSettings ) :
         loadSettings();
     }
 
-    m_tcpServer = new QTcpServer();
+/*    m_tcpServer = new QTcpServer();
     if ( !m_tcpServer->listen( QHostAddress( "127.0.0.1" ), 12345 ) )
     {
         qDebug() << "Unable to start the server: " << m_tcpServer->errorString();
@@ -123,7 +123,7 @@ MainWindow::MainWindow( bool debug, bool resetSettings ) :
     {
         connect( m_tcpServer, &QTcpServer::newConnection , this, &MainWindow::receiveTCP );
     }
-
+*/
 }
 
 void MainWindow::closeEvent( QCloseEvent *event )
@@ -1617,7 +1617,7 @@ void MainWindow::resetSettings()
 
 void MainWindow::slotDilbert()
 {
-    QWidget* widget = new QWidget();
+/*    QWidget* widget = new QWidget();
     QVBoxLayout* vLayout = new QVBoxLayout();
     vLayout->setContentsMargins( 1, 1, 1, 1 );
     vLayout->setSpacing( 1 );
@@ -1626,6 +1626,7 @@ void MainWindow::slotDilbert()
     vLayout->addWidget( wv );
     widget->setLayout( vLayout );
     widget->show();
+*/
 }
 
 void MainWindow::slotNew()
@@ -1700,16 +1701,17 @@ void MainWindow::newLabel()
 
 void MainWindow::receiveTCP()
 {
-    qDebug() << "something received!";
+/*    qDebug() << "something received!";
 
     m_clientConnection = m_tcpServer->nextPendingConnection();
     connect( m_clientConnection, &QTcpSocket::disconnected, m_clientConnection, &QTcpSocket::deleteLater );
     connect( m_clientConnection, &QTcpSocket::readyRead, this, &MainWindow::readTCP );
+*/
 }
 
 void MainWindow::readTCP()
 {
-    QString stuff = m_clientConnection->readAll();
+/*    QString stuff = m_clientConnection->readAll();
     qDebug() << stuff;
     QStringList sl = stuff.split( " " );
     float x = sl.at(0).toFloat();
@@ -1717,4 +1719,5 @@ void MainWindow::readTCP()
     Models::setGlobal( Fn::Property::G_SAGITTAL, x );
 
     Models::g()->submit();
+*/
 }
